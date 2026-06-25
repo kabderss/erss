@@ -1,231 +1,314 @@
-
-* {
+body {
+    background-color: #08080c;
+    color: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
-body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: #d6dadfe1;
-    color: #1a1a1a;
-    line-height: 1.6;
+a, button {
+    transition: all 0.2s ease;
 }
 
-a {
-    text-decoration: none;
-    color: inherit;
-    transition: color 0.3s ease, background-color 0.3s ease;
-}
-
-/* Навигационная панель (Шапка) */
+/* Навигация и Поиск */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 40px;
-    background-color: #ffffff;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    padding: 20px 10%;
+    background-color: rgba(8, 8, 12, 0.9);
+    backdrop-filter: blur(10px);
     position: sticky;
     top: 0;
     z-index: 100;
+    border-bottom: 1px solid #161622;
 }
 
 .logo {
     font-weight: 900;
-    font-size: 1.4rem;
     letter-spacing: 2px;
-    color: #0b2545;
+    font-size: 20px;
+}
+
+.logo-accent {
+    color: #00ff66;
+}
+
+.search-box input {
+    background-color: #111118;
+    border: 1px solid #1c1c2b;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 20px;
+    width: 280px;
+    font-size: 14px;
+}
+
+.search-box input:focus {
+    outline: none;
+    border-color: #00ff66;
+    box-shadow: 0 0 10px rgba(0, 255, 102, 0.2);
 }
 
 .nav-links a {
-    margin-left: 25px;
-    font-weight: 500;
-    color: #666;
+    color: #aaa;
+    text-decoration: none;
+    font-size: 14px;
 }
 
 .nav-links a:hover {
-    color: #0b2545;
+    color: #00ff66;
 }
 
-/* Секция Hero (Обложка и инфо) */
-.hero {
+/* Фильтры управления */
+.controls-section {
+    padding: 40px 10% 10px 10%;
+    max-width: 1000px;
+    margin: 0 auto;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    gap: 60px;
-    padding: 60px 40px;
-    max-width: 1200px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.filter-container {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background-color: #111118;
+    border: 1px solid #1c1c2b;
+    color: #aaa;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.filter-btn:hover, .filter-btn.active {
+    background-color: #00ff66;
+    color: #000;
+    border-color: #00ff66;
+    font-weight: bold;
+}
+
+.chart-meta {
+    color: #555577;
+    font-size: 14px;
+}
+
+/* Основной список чарта */
+.chart-section {
+    padding: 20px 10% 80px 10%;
+    max-width: 1000px;
     margin: 0 auto;
 }
 
-.album-cover img {
-    width: 380px;
-    height: 380px;
-    object-fit: cover;
-    border-radius: 8px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+.chart-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-.album-info {
-    max-width: 500px;
-}
-
-.release-date {
-    display: inline-block;
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: #8da9c4;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 10px;
-}
-
-.album-info h1 {
-    font-size: 3rem;
-    color: #0b2545;
-    margin-bottom: 15px;
-    line-height: 1.2;
-}
-
-.description {
-    color: #555;
-    font-size: 1.1rem;
-    margin-bottom: 30px;
-}
-
-.btn-primary {
-    display: inline-block;
-    background-color: #134074;
-    color: #fff;
-    padding: 12px 30px;
-    border-radius: 25px;
-    font-weight: 600;
-    box-shadow: 0 4px 15px rgba(19, 64, 116, 0.2);
-}
-
-.btn-primary:hover {
-    background-color: #0b2545;
-    transform: translateY(-2px);
-}
-
-/* Секция Треклиста */
-.tracklist-section {
-    max-width: 800px;
-    margin: 40px auto 80px auto;
-    padding: 0 20px;
-}
-
-.tracklist-section h2 {
-    font-size: 2rem;
-    color: #0b2545;
-    margin-bottom: 30px;
-    border-bottom: 2px solid #e2e8f0;
-    padding-bottom: 10px;
-}
-
-.tracks-list {
-    list-style: none;
-}
-
-.tracks-list li {
+.chart-item {
     display: flex;
     align-items: center;
-    padding: 15px 10px;
-    border-bottom: 1px solid #e2e8f0;
-    transition: background-color 0.2s ease;
+    padding: 14px 20px;
+    background-color: #111118;
+    border: 1px solid #161622;
+    border-radius: 8px;
+    cursor: pointer;
 }
 
-.tracks-list li:hover {
-    background-color: #eef4f8;
+.chart-item:hover {
+    transform: translateX(5px);
+    border-color: #26263b;
+    background-color: #14141f;
 }
 
-.track-number {
-    font-weight: 600;
-    color: #a0aec0;
-    width: 40px;
+.chart-position {
+    font-size: 18px;
+    font-weight: 800;
+    width: 45px;
+    color: #444455;
 }
 
-.track-title {
-    font-weight: 500;
-    color: #2d3748;
+/* Цвета лидеров */
+.rank-1 { color: #ffcc00; font-size: 22px; }
+.rank-2 { color: #cccccc; font-size: 20px; }
+.rank-3 { color: #cd7f32; font-size: 19px; }
+
+.item-cover {
+    width: 55px;
+    height: 55px;
+    border-radius: 6px;
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 12px;
+    color: rgba(255,255,255,0.3);
+}
+
+.item-info {
     flex-grow: 1;
 }
 
-.track-duration {
-    color: #718096;
-    font-variant-numeric: tabular-nums;
+.item-title {
+    display: block;
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 2px;
 }
 
-/* Подвал и Ссылки на стриминги */
-.footer {
-    background-color: #0b2545;
-    color: #fff;
-    text-align: center;
-    padding: 60px 20px;
+.item-artist {
+    display: block;
+    color: #777788;
+    font-size: 14px;
 }
 
-.footer h3 {
-    font-size: 1.5rem;
-    margin-bottom: 25px;
-    font-weight: 500;
+.item-genre-tag {
+    background-color: #1a1a26;
+    color: #8888aa;
+    padding: 4px 8px;
+    font-size: 11px;
+    border-radius: 4px;
+    margin-right: 25px;
 }
 
-.streaming-links {
-    display: flex;
+.item-status {
+    font-size: 12px;
+    font-weight: bold;
+    width: 40px;
+    text-align: right;
+}
+.status-up { color: #00ff66; }
+.status-down { color: #ff3344; }
+.status-steady { color: #444455; }
+.status-new { 
+    background-color: #00ff66; 
+    color: #000; 
+    padding: 2px 6px; 
+    border-radius: 3px; 
+    font-size: 10px;
+}
+
+/* Модальное окно (Поп-ап детальной инфы) */
+.modal {
+    display: none; 
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.85);
+    z-index: 1000;
+    align-items: center;
     justify-content: center;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin-bottom: 40px;
+    backdrop-filter: blur(5px);
 }
 
-.stream-link {
-    background-color: rgba(255, 255, 255, 0.1);
-    padding: 10px 25px;
-    border-radius: 20px;
-    font-size: 0.95rem;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+.modal.open {
+    display: flex;
 }
 
-.stream-link:hover {
-    background-color: #ffffff;
-    color: #0b2545;
+.modal-content {
+    background-color: #111118;
+    border: 1px solid #222235;
+    width: 90%;
+    max-width: 550px;
+    border-radius: 12px;
+    position: relative;
+    padding: 35px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6);
 }
 
-.copyright {
-    font-size: 0.85rem;
-    color: #8da9c4;
+.close-modal {
+    position: absolute;
+    top: 15px; right: 20px;
+    background: none; border: none;
+    color: #666; font-size: 28px;
+    cursor: pointer;
+}
+.close-modal:hover { color: #fff; }
+
+.modal-body {
+    display: flex;
+    gap: 30px;
 }
 
-/* Адаптивность для мобильных устройств */
+.modal-cover {
+    width: 180px;
+    height: 180px;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+.modal-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-badge {
+    align-self: flex-start;
+    background-color: #00ff66;
+    color: #000;
+    padding: 3px 10px;
+    font-size: 11px;
+    font-weight: bold;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.modal-info h2 {
+    margin: 0 0 5px 0;
+    font-size: 24px;
+}
+
+.modal-artist {
+    color: #00ff66;
+    font-size: 18px;
+    margin: 0 0 20px 0;
+}
+
+.modal-details p {
+    margin: 6px 0;
+    font-size: 14px;
+    color: #aaa;
+}
+.modal-details strong { color: #fff; }
+
+.btn-play {
+    margin-top: auto;
+    background-color: #fff;
+    color: #000;
+    border: none;
+    padding: 12px 24px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.btn-play:hover { background-color: #00ff66; }
+
+/* Подвал */
+.footer {
+    text-align: center;
+    padding: 40px;
+    background-color: #050508;
+    border-top: 1px solid #12121a;
+}
+.copyright { color: #444455; font-size: 13px; }
+
+/* Адаптивность */
 @media (max-width: 768px) {
-    .navbar {
-        padding: 15px 20px;
-    }
-
-    .hero {
-        flex-direction: column;
-        text-align: center;
-        gap: 30px;
-        padding: 40px 20px;
-    }
-
-    .album-cover img {
-        width: 280px;
-        height: 280px;
-    }
-
-    .album-info h1 {
-        font-size: 2.2rem;
-    }
-    
-    .streaming-links {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .stream-link {
-        width: 100%;
-        max-width: 260px;
-    }
+    .navbar { flex-direction: column; gap: 15px; padding: 20px 5%; }
+    .search-box input { width: 100%; }
+    .controls-section { padding: 20px 5%; justify-content: center; }
+    .chart-section { padding: 10px 5% 60px 5%; }
+    .item-genre-tag { display: none; }
+    .modal-body { flex-direction: column; align-items: center; text-align: center; }
+    .modal-badge { align-self: center; }
 }
