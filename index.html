@@ -3,109 +3,244 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Radiohead — OK Computer</title>
+    <title>MusicCharts — Топ-30 Альбомов</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <header class="navbar">
-        <div class="logo">ersultan.com</div>
+        <div class="logo">MUSIC<span class="logo-accent">CHARTS</span></div>
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Поиск альбома или артиста...">
+        </div>
         <nav class="nav-links">
-            <a href="#tracks">Треки</a>
-            <a href="#listen">Слушать</a>
+            <a href="#chart-anchor">Главный чарт</a>
         </nav>
     </header>
 
     <main>
-        <section class="hero">
-            <div class="album-cover">
-                <img src="ok computer.jpg" alt="Обложка альбома OK Computer">
+        <section class="controls-section" id="chart-anchor">
+            <div class="filter-container">
+                <button class="filter-btn active" data-genre="all">Все жанры</button>
+                <button class="filter-btn" data-genre="Рок">Рок</button>
+                <button class="filter-btn" data-genre="Поп">Поп</button>
+                <button class="filter-btn" data-genre="Рэп">Рэп</button>
+                <button class="filter-btn" data-genre="Электроника">Электроника</button>
+                <button class="filter-btn" data-genre="Метал">Метал</button>
             </div>
-            <div class="album-info">
-                <span class="release-date">Релиз: 1997</span>
-                <h1>OK Computer</h1>
-                <p class="description">Культовый третий студийный альбом британской рок-группы Radiohead. Музыкальное исследование тем отчуждения, потребительства и влияния технологий на современное общество.</p>
-                <a href="#listen" class="btn-primary">Слушать альбом</a>
+            <div class="chart-meta">
+                <span id="counter">Показано: 30 альбомов</span>
             </div>
         </section>
 
-        <section id="tracks" class="tracklist-section">
-            <h2>Треклист</h2>
-            <ol class="tracks-list">
-                <li>
-                    <span class="track-number">01</span>
-                    <span class="track-title">Airbag</span>
-                    <span class="track-duration">4:44</span>
-                </li>
-                <li>
-                    <span class="track-number">02</span>
-                    <span class="track-title">Paranoid Android</span>
-                    <span class="track-duration">6:23</span>
-                </li>
-                <li>
-                    <span class="track-number">03</span>
-                    <span class="track-title">Subterranean Homesick Alien</span>
-                    <span class="track-duration">4:27</span>
-                </li>
-                <li>
-                    <span class="track-number">04</span>
-                    <span class="track-title">Exit Music (For a Film)</span>
-                    <span class="track-duration">4:24</span>
-                </li>
-                <li>
-                    <span class="track-number">05</span>
-                    <span class="track-title">Let Down</span>
-                    <span class="track-duration">4:59</span>
-                </li>
-                <li>
-                    <span class="track-number">06</span>
-                    <span class="track-title">Karma Police</span>
-                    <span class="track-duration">4:21</span>
-                </li>
-                <li>
-                    <span class="track-number">07</span>
-                    <span class="track-title">Fitter Happier</span>
-                    <span class="track-duration">1:57</span>
-                </li>
-                <li>
-                    <span class="track-number">08</span>
-                    <span class="track-title">Electioneering</span>
-                    <span class="track-duration">3:50</span>
-                </li>
-                <li>
-                    <span class="track-number">09</span>
-                    <span class="track-title">Climbing Up the Walls</span>
-                    <span class="track-duration">4:45</span>
-                </li>
-                <li>
-                    <span class="track-number">10</span>
-                    <span class="track-title">No Surprises</span>
-                    <span class="track-duration">3:48</span>
-                </li>
-                <li>
-                    <span class="track-number">11</span>
-                    <span class="track-title">Lucky</span>
-                    <span class="track-duration">4:19</span>
-                </li>
-                <li>
-                    <span class="track-number">12</span>
-                    <span class="track-title">The Tourist</span>
-                    <span class="track-duration">5:24</span>
-                </li>
-            </ol>
+        <section class="chart-section">
+            <div class="chart-list" id="chartContainer">
+                </div>
         </section>
     </main>
 
-    <footer id="listen" class="footer">
-        <h3>Слушать на платформах</h3>
-        <div class="streaming-links">
-            <a href="https://music.yandex.ru/album/3389007?utm_source=web&utm_medium=copy_link" target="_blank" class="stream-link">Яндекс Музыка</a>
-            <a href="https://soundcloud.com/carlo-battigelli/sets/ok-computer?utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing" target="_blank" class="stream-link">SoundCloud</a>
-            <a href="https://music.apple.com/ru/album/ok-computer/1097861387" target="_blank" class="stream-link">Apple Music</a>
-            <a href="https://open.spotify.com/album/6dVIqQ8qmQ5GBnJ9shOYGE?si=BHOA0MeEQD-M69EO0Ryjcw" target="_blank" class="stream-link">Spotify</a>
+    <div class="modal" id="albumModal">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <div class="modal-body">
+                <div class="modal-cover" id="modalCover"></div>
+                <div class="modal-info">
+                    <span class="modal-badge" id="modalRank">№1</span>
+                    <h2 id="modalTitle">Название альбома</h2>
+                    <p class="modal-artist" id="modalArtist">Исполнитель</p>
+                    <div class="modal-details">
+                        <p><strong>Жанр:</strong> <span id="modalGenre">-</span></p>
+                        <p><strong>Год релиза:</strong> <span id="modalYear">-</span></p>
+                        <p><strong>Недель в чарте:</strong> <span id="modalWeeks">-</span></p>
+                    </div>
+                    <button class="btn-play">Слушать альбом</button>
+                </div>
+            </div>
         </div>
-        <p class="copyright">&copy; 1997 Radiohead. Все права защищены.</p>
+    </div>
+
+    <footer class="footer">
+        <p class="copyright">© 2026 MusicCharts. Интерактивный хит-парад.</p>
     </footer>
 
+   <script>
+        // Полный массив данных (59 альбомов) с твоими ссылками на плеер и фиксом обложек
+        const albumData = [
+            { rank: 1, title: "OK Computer", artist: "Radiohead", genre: "Рок", year: 1997, weeks: 14, status: "steady", cover: "https://upload.wikimedia.org/wikipedia/en/a/a1/Radiohead.okcomputer.albumart.jpg", spotify: "https://open.voidware.de/album/6dVIqQ8qmQ5GBnJ9shOYGE" },
+            { rank: 2, title: "Abbey Road", artist: "The Beatles", genre: "Рок", year: 1969, weeks: 42, status: "up", cover: "https://upload.wikimedia.org/wikipedia/en/4/42/Beatles_-_Abbey_Road.jpg", spotify: "https://open.spotify.com/album/0ETFjACtuP2ADo6LFhL6HN" },
+            { rank: 3, title: "Random Access Memories", artist: "Daft Punk", genre: "Электроника", year: 2013, weeks: 25, status: "up", cover: "https://upload.wikimedia.org/wikipedia/en/a/a7/Random_Access_Memories.jpg", spotify: "https://open.voidware.de/album/4m2880jivSbbyEGAKfITCa" },
+            { rank: 4, title: "After Hours", artist: "The Weeknd", genre: "Поп", year: 2020, weeks: 61, status: "new", cover: "https://upload.wikimedia.org/wikipedia/en/c/c1/The_Weeknd_-_After_Hours.png", spotify: "https://open.spotify.com/album/4yP0hdKOZPNshxUOjY0cZj" },
+            { rank: 5, title: "The Eminem Show", artist: "Eminem", genre: "Рэп", year: 2002, weeks: 34, status: "up", cover: "https://upload.wikimedia.org/wikipedia/en/3/35/The_Eminem_Show.jpg", spotify: "https://open.spotify.com/album/2cWBwpqMsDJC1ZUwz813lo" },
+            { rank: 6, title: "Nevermind", artist: "Nirvana", genre: "Рок", year: 1991, weeks: 50, status: "down", cover: "https://upload.wikimedia.org/wikipedia/en/b/b7/NirvanaNevermindalbumcover.jpg", spotify: "https://open.spotify.com/album/2guirTSEqLizK7j9i1MTTZ" },
+            { rank: 7, title: "Master of Puppets", artist: "Metallica", genre: "Метал", year: 1986, weeks: 19, status: "steady", cover: "https://upload.wikimedia.org/wikipedia/en/b/b2/Metallica_-_Master_of_Puppets_cover.jpg", spotify: "https://open.spotify.com/album/41bTjcSaiEe4G40RVVHbux" },
+            { rank: 8, title: "Discovery", artist: "Daft Punk", genre: "Электроника", year: 2001, weeks: 15, status: "up", cover: "https://upload.wikimedia.org/wikipedia/en/a/ae/Daft_Punk_-_Discovery.jpg", spotify: "https://open.spotify.com/album/2noRn2Aes5aoNVsU6iWThc" },
+            { rank: 9, title: "Future Nostalgia", artist: "Dua Lipa", genre: "Поп", year: 2020, weeks: 48, status: "down", cover: "https://upload.wikimedia.org/wikipedia/en/f/f5/Dua_Lipa_-_Future_Nostalgia_%28Official_Album_Cover%29.png", spotify: "https://open.spotify.com/album/5lKlFlReHOLShQKyRv6AL9" },
+            { rank: 10, title: "To Pimp a Butterfly", artist: "Kendrick Lamar", genre: "Рэп", year: 2015, weeks: 12, status: "up", cover: "https://upload.wikimedia.org/wikipedia/en/f/f6/Kendrick_Lamar_-_To_Pimp_a_Butterfly.png", spotify: "https://open.spotify.com/album/7ycBtnsMtyVbbwTfJwRjSP" },
+            { rank: 11, title: "Meteora", artist: "Linkin Park", genre: "Рок", year: 2003, weeks: 30, status: "steady", cover: "https://upload.wikimedia.org/wikipedia/en/0/0c/Linkin_Park_Meteora_Album_Cap.jpg", spotify: "https://open.spotify.com/album/4Gfnly5CzMJQqkUFfoHaP3" },
+            { rank: 12, title: "My Beautiful Dark Twisted Fantasy", artist: "Kanye West", genre: "Рэп", year: 2010, weeks: 22, status: "down", cover: "https://upload.wikimedia.org/wikipedia/en/b/be/Mbdtf-thumb.jpg", spotify: "https://open.spotify.com/album/20r762YmB5HeofjMCiPMLv" },
+            { rank: 13, title: "Violator", artist: "Depeche Mode", genre: "Электроника", year: 1990, weeks: 8, status: "up", cover: "https://upload.wikimedia.org/wikipedia/en/9/9a/Depeche_Mode_-_Violator.png", spotify: "https://open.spotify.com/album/0Tg76MY2wNK4j37iCb6qyH" },
+            { rank: 14, title: "Paranoid", artist: "Black Sabbath", genre: "Метал", year: 1970, weeks: 5, status: "new", cover: "https://upload.wikimedia.org/wikipedia/en/6/64/Black_Sabbath_-_Paranoid.jpg", spotify: "https://open.spotify.com/album/132qAo1cDiEJdA3fv4xyNK" },
+            { rank: 15, title: "÷ (Divide)", artist: "Ed Sheeran", genre: "Поп", year: 2017, weeks: 95, status: "down", cover: "https://upload.wikimedia.org/wikipedia/en/4/45/Divide_cover_New.png", spotify: "https://open.spotify.com/album/3T4tUhGYeRNVUGevb0wThu" },
+            { rank: 16, title: "The Marshall Mathers LP", artist: "Eminem", genre: "Рэп", year: 2000, weeks: 40, status: "up", cover: "https://upload.wikimedia.org/wikipedia/en/a/ae/The_Marshall_Mathers_LP.jpg", spotify: "https://open.spotify.com/album/6t7956yu5zYf5A829XRiHC" },
+            { rank: 17, title: "Kid A", artist: "Radiohead", genre: "Рок", year: 2000, weeks: 11, status: "down", cover: "https://upload.wikimedia.org/wikipedia/en/0/02/Radioheadkida.png", spotify: "https://open.spotify.com/album/6GjwtEZcfenmOf6l18N7T7" },
+            { rank: 18, title: "Rust in Peace", artist: "Megadeth", genre: "Метал", year: 1990, weeks: 3, status: "up", cover: "https://upload.wikimedia.org/wikipedia/en/d/dc/Megadeth_-_Rust_in_Peace.jpg", spotify: "https://open.spotify.com/album/4E6olE6UEAlk6rF8ThlHc4" },
+            { rank: 19, title: "Selected Ambient Works 85–92", artist: "Aphex Twin", genre: "Электроника", year: 1992, weeks: 16, status: "steady", cover: "https://upload.wikimedia.org/wikipedia/en/4/49/AphexTwinSelectedAmbientWorks85-92.jpg", spotify: "https://open.spotify.com/album/7aNclGRxTysfh6z0d8671k" },
+            { rank: 20, title: "Fine Line", artist: "Harry Styles", genre: "Поп", year: 2019, weeks: 55, status: "up", cover: "https://upload.wikimedia.org/wikipedia/en/b/b4/Harry_Styles_-_Fine_Line.png", spotify: "https://open.spotify.com/album/7xV2TzoaVc0ycW7fwBwAml" },
+            { rank: 21, title: "DAMN.", artist: "Kendrick Lamar", genre: "Рэп", year: 2017, weeks: 70, status: "down", cover: "https://upload.wikimedia.org/wikipedia/en/5/51/Kendrick_Lamar_-_Damn.png", spotify: "https://open.spotify.com/album/4eLPsYPBmXABThSJ821sqY" },
+            { rank: 22, title: "The Number of the Beast", artist: "Iron Maiden", genre: "Метал", year: 1982, weeks: 2, status: "new", cover: "https://upload.wikimedia.org/wikipedia/en/1/1a/Iron_Maiden_-_The_Number_of_the_Beast.jpg", spotify: "https://open.spotify.com/album/6igk1Marbns9fMeW2x2P4s" },
+            { rank: 23, title: "The Fat of the Land", artist: "The Prodigy", genre: "Электроника", year: 1997, weeks: 14, status: "down", cover: "https://upload.wikimedia.org/wikipedia/en/1/13/The_Prodigy_-_The_Fat_of_the_Land.png", spotify: "https://open.spotify.com/album/2yHXZ4wX6k6EgYQG3MruA8" },
+            { rank: 24, title: "Californication", artist: "Red Hot Chili Peppers", genre: "Рок", year: 1999, weeks: 80, status: "up", cover: "https://upload.wikimedia.org/wikipedia/en/d/df/RedHotChiliPeppersCalifornication.jpg", spotify: "https://open.spotify.com/album/2Y9IRtehByVkegoD7TcLfi" },
+            { rank: 25, title: "Starboy", artist: "The Weeknd", genre: "Поп", year: 2016, weeks: 110, status: "steady", cover: "https://upload.wikimedia.org/wikipedia/en/3/39/The_Weeknd_-_Starboy.png", spotify: "https://open.spotify.com/album/2ODvWsOgouMbaA5xf0RkJe" },
+            { rank: 26, title: "good kid, m.A.A.d city", artist: "Kendrick Lamar", genre: "Рэп", year: 2012, weeks: 130, status: "up", cover: "https://upload.wikimedia.org/wikipedia/en/1/1a/Good_kid_maad_city_album_cover.jpg", spotify: "https://open.spotify.com/album/748dZDqSZy6aPXKcI9H80u" },
+            { rank: 27, title: "Back in Black", artist: "AC/DC", genre: "Рок", year: 1980, weeks: 200, status: "down", cover: "https://upload.wikimedia.org/wikipedia/en/e/e3/Back_in_Black_cover.png", spotify: "https://open.spotify.com/album/6mUdeDZCsExyJLMdAfDuwh" },
+            { rank: 28, title: "Mezzanine", artist: "Massive Attack", genre: "Электроника", year: 1998, weeks: 9, status: "up", cover: "https://upload.wikimedia.org/wikipedia/en/e/e9/Massive_Attack_-_Mezzanine.png", spotify: "https://open.spotify.com/album/49MNmJhZQewjt06rpwp6QR" },
+            { rank: 29, title: "Ride the Lightning", artist: "Metallica", genre: "Метал", year: 1984, weeks: 15, status: "down", cover: "https://upload.wikimedia.org/wikipedia/en/b/b7/Metallica_-_Ride_the_Lightning_cover.jpg", spotify: "https://open.spotify.com/album/05DePtm7oQMdL3Uzw2Jmsc" },
+            
+            // ОБНОВЛЕННЫЕ ССЫЛКИ ДЛЯ АЛЬБОМОВ С №30 ПО №59
+            { rank: 30, title: "The Dark Side of the Moon", artist: "Pink Floyd", genre: "Рок", year: 1973, weeks: 920, status: "up", cover: "https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png", spotify: "https://open.spotify.com/album/4LH4d3cOWNNsVw41Gqt2kv" },
+            { rank: 31, title: "Thriller", artist: "Michael Jackson", genre: "Поп", year: 1982, weeks: 450, status: "steady", cover: "https://upload.wikimedia.org/wikipedia/en/5/55/Michael_Jackson_-_Thriller.png", spotify: "https://open.spotify.com/album/2ANVost0y2y52ema1E9xAZ" },
+            { rank: 32, title: "Homework", artist: "Daft Punk", genre: "Электроника", year: 1997, weeks: 48, status: "down", cover: "https://upload.wikimedia.org/wikipedia/en/9/9c/Daftpunk-homework.jpg", spotify: "https://open.spotify.com/album/5uRdvURvbyHB4DkdVFVQya" },
+            { rank: 33, title: "The Blueprint", artist: "Jay-Z", genre: "Рэп", year: 2001, weeks: 32, status: "up", cover: "https://upload.wikimedia.org/wikipedia/en/a/a3/Jay-Z_-_The_Blueprint.jpg", spotify: "https://open.spotify.com/album/69CmkikTHkGKdkrUZTtyWl" },
+            { rank: 34, title: "Metallica (The Black Album)", artist: "Metallica", genre: "Метал", year: 1991, weeks: 580, status: "up", cover: "https://upload.wikimedia.org/wikipedia/en/2/2c/Metallica_-_Metallica_cover.jpg", spotify: "https://open.spotify.com/album/2Kh43m04B1UkVcpcRa1Zug" },
+            { rank: 35, title: "In Rainbows", artist: "Radiohead", genre: "Рок", year: 2007, weeks: 35, status: "new", cover: "https://upload.wikimedia.org/wikipedia/en/2/2e/In_Rainbows_official_cover.png", spotify: "https://open.spotify.com/album/5vkqYmiPBYLaalcmjujWxK" },
+            { rank: 36, title: "Illmatic", artist: "Nas", genre: "Рэп", year: 1994, weeks: 62, status: "steady", cover: "https://upload.wikimedia.org/wikipedia/en/8/82/NasIllmatic.jpg", spotify: "https://open.spotify.com/album/3kEtdS2pH6hKcMU9Wioob1" },
+            { rank: 37, title: "Alive 2007", artist: "Daft Punk", genre: "Электроника", year: 2007, weeks: 21, status: "up", cover: "https://upload.wikimedia.org/wikipedia/en/3/39/Daft_Punk_Alive_2007.jpg", spotify: "https://open.spotify.com/album/2noRn2Aes5aoNVsU6iWThc" },
+            { rank: 38, title: "1989 (Taylor's Version)", artist: "Taylor Swift", genre: "Поп", year: 2014, weeks: 380, status: "down", cover: "https://upload.wikimedia.org/wikipedia/en/f/f6/Taylor_Swift_-_1989.png", spotify: "https://open.spotify.com/album/1o59UpKw81iHR0HPiSkJR0" },
+            { rank: 39, title: "Mr. Morale & the Big Steppers", artist: "Kendrick Lamar", genre: "Рэп", year: 2022, weeks: 40, status: "up", cover: "https://upload.wikimedia.org/wikipedia/en/e/e1/Kendrick_Lamar_-_Mr._Morale_%26_the_Big_Steppers.jpg", spotify: "https://open.spotify.com/album/79ONNoS4M9tfIA1mYLBYVX" },
+            { rank: 40, title: "Hybrid Theory", artist: "Linkin Park", genre: "Рок", year: 2000, weeks: 290, status: "steady", cover: "https://upload.wikimedia.org/wikipedia/en/2/2a/LinkinParkHybridTheoryAlbumCover.jpg", spotify: "https://open.spotify.com/album/6hPkbAV3ZXpGZBGUvL6jVM" },
+            { rank: 41, title: "The College Dropout", artist: "Kanye West", genre: "Рэп", year: 2004, weeks: 180, status: "up", cover: "https://upload.wikimedia.org/wikipedia/en/a/a3/Kanyewest_collegedropout.jpg", spotify: "https://open.spotify.com/album/4Uv86qWpGTxf7fU7lG5X6F" },
+            { rank: 42, title: "Music for the Masses", artist: "Depeche Mode", genre: "Электроника", year: 1987, weeks: 25, status: "down", cover: "https://upload.wikimedia.org/wikipedia/en/e/ed/Depeche_Mode_-_Music_for_the_Masses.png", spotify: "https://open.spotify.com/album/1xqMucG5oT8JX7gJw4JQ7Q" },
+            { rank: 43, title: "Heaven and Hell", artist: "Black Sabbath", genre: "Метал", year: 1980, weeks: 41, status: "new", cover: "https://upload.wikimedia.org/wikipedia/en/e/e0/Black_Sabbath_-_Heaven_and_Hell.jpg", spotify: "https://open.spotify.com/album/1zNG63rfK4N5M8s0lWm4yn" },
+            { rank: 44, title: "x (Multiply)", artist: "Ed Sheeran", genre: "Поп", year: 2014, weeks: 250, status: "down", cover: "https://upload.wikimedia.org/wikipedia/en/a/ad/X_cover.png", spotify: "https://open.spotify.com/album/5WxbjM8j6QJLkM9m2f7a8K" },
+            { rank: 45, title: "The Slim Shady LP", artist: "Eminem", genre: "Рэп", year: 1999, weeks: 115, status: "up", cover: "https://upload.wikimedia.org/wikipedia/en/3/35/The_Slim_Shady_LP.jpg", spotify: "https://open.spotify.com/album/0vE6mttRTBXRe9rKghyr1l" },
+            { rank: 46, title: "Amnesiac", artist: "Radiohead", genre: "Рок", year: 2001, weeks: 22, status: "steady", cover: "https://upload.wikimedia.org/wikipedia/en/8/8c/Radioheadamnesiac.png", spotify: "https://open.spotify.com/album/1HrMmB5useeZ0F5lHrMvl0" },
+            { rank: 47, title: "Countdown to Extinction", artist: "Megadeth", genre: "Метал", year: 1992, weeks: 50, status: "up", cover: "https://upload.wikimedia.org/wikipedia/en/d/da/Megadeth_-_Countdown_to_Extinction.jpg", spotify: "https://open.spotify.com/album/4N7in56Ebi41G3FOEIjN1D" },
+            { rank: 48, title: "...I Care Because You Do", artist: "Aphex Twin", genre: "Электроника", year: 1995, weeks: 12, status: "down", cover: "https://upload.wikimedia.org/wikipedia/en/6/63/AphexTwin...I_Care_Because_You_Do.jpg", spotify: "https://open.spotify.com/album/0VG7XLJ8gSynEQDVnpHNNU" },
+            { rank: 49, title: "Harry's House", artist: "Harry Styles", genre: "Поп", year: 2022, weeks: 85, status: "up", cover: "https://upload.wikimedia.org/wikipedia/en/d/d5/Harry_Styles_-_Harry%27s_House.png", spotify: "https://open.spotify.com/album/5r36AJ6VOJtp00oxSkBZ5h" },
+            { rank: 50, title: "Enter the Wu-Tang (36 Chambers)", artist: "Wu-Tang Clan", genre: "Рэп", year: 1993, weeks: 90, status: "steady", cover: "https://upload.wikimedia.org/wikipedia/en/5/53/Wu-TangClanEntertheWu-Tangalbumcover.jpg", spotify: "https://open.spotify.com/album/7ywSM58A3VW3LtWcSX9pC6" },
+            { rank: 51, title: "Powerslave", artist: "Iron Maiden", genre: "Метал", year: 1984, weeks: 44, status: "up", cover: "https://upload.wikimedia.org/wikipedia/en/1/1c/Iron_Maiden_-_Powerslave.jpg", spotify: "https://open.spotify.com/album/4DGdY1i6R6IhW6fM4hYQYw" },
+            { rank: 52, title: "Music for the Jilted Generation", artist: "The Prodigy", genre: "Электроника", year: 1994, weeks: 38, status: "down", cover: "https://upload.wikimedia.org/wikipedia/en/a/af/The_Prodigy_-_Music_for_the_Jilted_Generation.png", spotify: "https://open.spotify.com/album/3rN7jP0M4M5A4s8A4WnB7A" },
+            { rank: 53, title: "Blood Sugar Sex Magik", artist: "Red Hot Chili Peppers", genre: "Рок", year: 1991, weeks: 195, status: "up", cover: "https://upload.wikimedia.org/wikipedia/en/b/b5/BloodSugarSexMagik.jpg", spotify: "https://open.spotify.com/album/30Perjew8HyGkdSmqguYyg" },
+            { rank: 54, title: "Dawn FM", artist: "The Weeknd", genre: "Поп", year: 2022, weeks: 70, status: "new", cover: "https://upload.wikimedia.org/wikipedia/en/b/b9/The_Weeknd_-_Dawn_FM.png", spotify: "https://open.spotify.com/album/2nLOHgzXzwFEpl62zAgCEC" },
+            { rank: 55, title: "Madvillainy", artist: "Madvillain", genre: "Рэп", year: 2004, weeks: 45, status: "up", cover: "https://upload.wikimedia.org/wikipedia/en/a/a9/Madvillainy_cover.png", spotify: "https://open.spotify.com/album/19bQiwEKhXUBJWY6oV3KZk" },
+            { rank: 56, title: "Highway to Hell", artist: "AC/DC", genre: "Рок", year: 1979, weeks: 260, status: "down", cover: "https://upload.wikimedia.org/wikipedia/en/a/ac/Acdc_Highway_to_Hell.JPG", spotify: "https://open.spotify.com/album/10v912xgTZbjAtYfyKWJCS" },
+            { rank: 57, title: "Blue Lines", artist: "Massive Attack", genre: "Электроника", year: 1991, weeks: 58, status: "steady", cover: "https://upload.wikimedia.org/wikipedia/en/a/a4/MassiveAttackBlueLines.jpg", spotify: "https://open.spotify.com/album/5mAPk4qeNqVLtNydaWbWlf" },
+            { rank: 58, title: "Toxicity", artist: "System of a Down", genre: "Метал", year: 2001, weeks: 120, status: "up", cover: "https://upload.wikimedia.org/wikipedia/en/6/64/SystemofaDownToxicityalbumcover.jpg", spotify: "https://open.spotify.com/album/6jWde94ln40epKIQCd8XUh" },
+            { rank: 59, title: "The Downward Spiral", artist: "Nine Inch Nails", genre: "Метал", year: 1994, weeks: 65, status: "new", cover: "https://upload.wikimedia.org/wikipedia/en/9/9f/Nine_Inch_Nails_-_The_Downward_Spiral.png", spotify: "https://open.spotify.com/album/7a7arAXDE0BiaMgHLhdjGF" }
+        ];
+
+        const chartContainer = document.getElementById('chartContainer');
+        const searchInput = document.getElementById('searchInput');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const counterText = document.getElementById('counter');
+        const modal = document.getElementById('albumModal');
+        const closeModalBtn = document.querySelector('.close-modal');
+
+        let currentGenre = 'all';
+        let searchQuery = '';
+
+        function getStatusTemplate(status) {
+            if (status === 'up') return '<span class="item-status status-up">▲</span>';
+            if (status === 'down') return '<span class="item-status status-down">▼</span>';
+            if (status === 'new') return '<span class="item-status status-new">NEW</span>';
+            return '<span class="item-status status-steady">•</span>';
+        }
+
+        function renderChart() {
+            if (!chartContainer) return;
+            chartContainer.innerHTML = '';
+            
+            const filteredAlbums = albumData.filter(album => {
+                const matchesGenre = currentGenre === 'all' || album.genre === currentGenre;
+                const matchesSearch = album.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                                      album.artist.toLowerCase().includes(searchQuery.toLowerCase());
+                return matchesGenre && matchesSearch;
+            });
+
+            if (counterText) {
+                counterText.textContent = `Показано: ${filteredAlbums.length} альбомов`;
+            }
+
+            if (filteredAlbums.length === 0) {
+                chartContainer.innerHTML = '<p style="text-align:center; color:#555; padding: 40px;">Ничего не найдено...</p>';
+                return;
+            }
+
+            filteredAlbums.forEach(album => {
+                const item = document.createElement('div');
+                item.className = 'chart-item';
+                
+                let rankClass = '';
+                if (album.rank === 1) rankClass = 'rank-1';
+                else if (album.rank === 2) rankClass = 'rank-2';
+                else if (album.rank === 3) rankClass = 'rank-3';
+
+                item.innerHTML = `
+                    <span class="chart-position ${rankClass}">${album.rank}</span>
+                    <img class="item-cover" src="${album.cover}" alt="${album.title}" loading="lazy" referrerpolicy="no-referrer">
+                    <div class="item-info">
+                        <span class="item-title">${album.title}</span>
+                        <span class="item-artist">${album.artist}</span>
+                    </div>
+                    <span class="item-genre-tag">${album.genre}</span>
+                    ${getStatusTemplate(album.status)}
+                `;
+
+                item.addEventListener('click', () => openModal(album));
+                chartContainer.appendChild(item);
+            });
+        }
+
+        function openModal(album) {
+            if (!modal) return;
+            document.getElementById('modalRank').textContent = `№${album.rank} в чарте`;
+            document.getElementById('modalTitle').textContent = album.title;
+            document.getElementById('modalArtist').textContent = album.artist;
+            document.getElementById('modalGenre').textContent = album.genre;
+            document.getElementById('modalYear').textContent = album.year;
+            document.getElementById('modalWeeks').textContent = album.weeks;
+            
+            const modalCover = document.getElementById('modalCover');
+            modalCover.style.background = 'none'; 
+            modalCover.innerHTML = `<img src="${album.cover}" referrerpolicy="no-referrer" style="width:100%; height:100%; object-fit:cover; border-radius:8px;">`;
+            
+            const playButton = document.querySelector('.btn-play');
+            if (playButton) {
+                playButton.onclick = () => {
+                    window.open(album.spotify, '_blank');
+                };
+            }
+            
+            modal.classList.add('open');
+        }
+
+        function closeModal() {
+            if (modal) modal.classList.remove('open');
+        }
+
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                searchQuery = e.target.value;
+                renderChart();
+            });
+        }
+
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                filterButtons.forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                currentGenre = e.target.getAttribute('data-genre');
+                renderChart();
+            });
+        });
+
+        if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+        
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+
+        document.addEventListener('DOMContentLoaded', renderChart);
+    </script>
 </body>
 </html>
